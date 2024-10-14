@@ -1,6 +1,7 @@
 package systemnegro.currencyconverter.api;
 
 import com.google.gson.Gson;
+import systemnegro.currencyconverter.exception.ApiException;
 import systemnegro.currencyconverter.model.dto.ExchangeRateDTO;
 
 import java.io.IOException;
@@ -15,7 +16,6 @@ public class ExchangeRateApiClient {
 
         String apiKey = System.getenv("API_KEY");
 
-
         try (HttpClient client = HttpClient.newHttpClient()) {
 
             HttpRequest request = HttpRequest.newBuilder()
@@ -29,7 +29,7 @@ public class ExchangeRateApiClient {
             if (response.statusCode() == 200) {
                 return new Gson().fromJson(response.body(), ExchangeRateDTO.class);
             } else {
-                return null;
+                throw new ApiException("Failed to fetch exchange rates. HTTP Status: " + response.statusCode());
             }
         }
 
