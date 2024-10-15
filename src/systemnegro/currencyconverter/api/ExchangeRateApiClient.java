@@ -10,16 +10,25 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
+
 public class ExchangeRateApiClient {
 
-    public ExchangeRateDTO fetchExchangeRates() throws IOException, InterruptedException {
+    public ExchangeRateDTO fetchExchangeRates(String baseCurrency, String targetCurrency, String value) throws IOException, InterruptedException {
 
         String apiKey = System.getenv("API_KEY");
+
+
+        String url = String.format("https://v6.exchangerate-api.com/v6/%s/pair/%s/%s/%s",
+                apiKey,
+                baseCurrency,
+                targetCurrency,
+                value);
+
 
         try (HttpClient client = HttpClient.newHttpClient()) {
 
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create("https://v6.exchangerate-api.com/v6/" + apiKey + "/pair/USD/BRL/100"))
+                    .uri(URI.create(url))
                     .build();
 
 
@@ -33,8 +42,6 @@ public class ExchangeRateApiClient {
             }
         }
 
-
     }
-
 
 }
