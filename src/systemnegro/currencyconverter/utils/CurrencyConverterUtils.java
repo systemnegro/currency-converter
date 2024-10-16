@@ -51,6 +51,12 @@ public class CurrencyConverterUtils {
         ExchangeRateDTO exchangeRateDTO = client.fetchExchangeRates(baseCurrency, targetCurrency, value);
         ExchangeRate exchangeRate = new ExchangeRate(exchangeRateDTO);
 
-        System.out.println(exchangeRate);
+        System.out.printf("""
+                        Valor em %s com a taxa de câmbio de %f conresponde ao valor final %f em %s
+                        """,
+                exchangeRate.getBaseCurrency(),
+                exchangeRate.getRate(),
+                exchangeRate.getConvertedAmount(),
+                exchangeRate.getTargetCurrency());
     }
 }
