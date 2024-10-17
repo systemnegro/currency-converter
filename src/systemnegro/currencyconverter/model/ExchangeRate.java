@@ -3,10 +3,10 @@ package systemnegro.currencyconverter.model;
 import systemnegro.currencyconverter.model.dto.ExchangeRateDTO;
 
 public class ExchangeRate {
-    private double rate;
-    private double convertedAmount;
-    private String baseCurrency;
-    private String  targetCurrency;
+    private final double rate;
+    private final double convertedAmount;
+    private final String baseCurrency;
+    private final String targetCurrency;
 
     public ExchangeRate(ExchangeRateDTO exchangeRateDTO) {
         this.rate = exchangeRateDTO.conversion_rate();
@@ -31,13 +31,4 @@ public class ExchangeRate {
         return convertedAmount;
     }
 
-    @Override
-    public String toString() {
-        return "ExchangeRate{" +
-                "rate=" + rate +
-                ", convertedAmount=" + convertedAmount +
-                ", baseCurrency='" + baseCurrency + '\'' +
-                ", targetCurrency='" + targetCurrency + '\'' +
-                '}';
-    }
 }
